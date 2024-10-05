@@ -97,6 +97,39 @@
           }
         }
       }
+    },
+    "angular-material-tailwind": {
+      "projectType": "library",
+      "root": "projects/angular-material-tailwind",
+      "sourceRoot": "projects/angular-material-tailwind/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/angular-material-tailwind/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/angular-material-tailwind/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/angular-material-tailwind/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/angular-material-tailwind/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }

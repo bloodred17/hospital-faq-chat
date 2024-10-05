@@ -1,23 +1,20 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {AngularMaterialTailwindComponent} from 'angular-material-tailwind';
-import {AccordionComponent} from '../../projects/angular-material-tailwind/src/lib/accordion/accordion.component';
 import {
-  AccordionToggleDirective
-} from '../../projects/angular-material-tailwind/src/lib/accordion/accordion-toggle.directive';
-import {
-  AccordionGroupDirective
-} from '../../projects/angular-material-tailwind/src/lib/accordion/accordion-group.directive';
+  AccordionComponent,
+  AccordionGroupDirective,
+  AccordionToggleDirective, AlertDirective
+} from 'angular-material-tailwind';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
-    AngularMaterialTailwindComponent,
     AccordionComponent,
     AccordionToggleDirective,
     AccordionGroupDirective,
+    AlertDirective,
   ],
   template: `
     <div class="p-2">
@@ -31,10 +28,9 @@ import {
         Button
       </button>
     </div>
-    <lib-angular-material-tailwind></lib-angular-material-tailwind>
-    <div accordionGroup>
+    <div mtAccordionGroup>
       <mt-accordion>
-        <div heading accordionToggle class="w-full flex-grow py-5">
+        <div heading mtAccordionToggle class="w-full flex-grow py-5">
           <span>What is Material Tailwind?</span>
         </div>
         <div class="pb-5 text-sm text-slate-500">
@@ -42,7 +38,7 @@ import {
         </div>
       </mt-accordion>
       <mt-accordion>
-        <div heading accordionToggle class="w-full flex-grow py-5">
+        <div heading mtAccordionToggle class="w-full flex-grow py-5">
           <span>What is Material Tailwind?</span>
         </div>
         <div class="pb-5 text-sm text-slate-500">
@@ -50,7 +46,12 @@ import {
         </div>
       </mt-accordion>
     </div>
-
+    <div mtAlert>
+      A simple filled alert for showing message.
+      <button class="flex items-center justify-center transition-all w-8 h-8 rounded-md text-white hover:bg-white/10 active:bg-white/10 absolute top-1.5 right-1.5" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
     <router-outlet></router-outlet>
   `,
 })

@@ -4,20 +4,26 @@ import {ClassValue} from 'clsx';
 import {mtx} from '../core/mtx';
 
 export const alertVariants = cva(
-  'mt-3 relative flex w-full p-3  text-white rounded-md',
+  'relative flex w-full p-3 rounded-md',
   {
     variants: {
       variant: {
-        default: 'bg-slate-800',
+        default: 'text-white bg-slate-800',
+        outline: 'text-slate-600 border border-slate-300',
+        ghost: 'text-slate-600 bg-slate-100',
+        info: 'text-white bg-info',
+        danger: 'text-white bg-danger',
+        success: 'text-white bg-success',
+        warning: 'text-white bg-warning'
       },
       size: {
-        default: '',
-        sm: 'text-sm',
+        small: 'text-sm',
+        large: 'text-lg',
       },
     },
     defaultVariants: {
       variant: 'default',
-      size: 'default',
+      size: 'small',
     },
   },
 );
@@ -48,7 +54,7 @@ export class AlertDirective {
     this._variant.set(variant);
   }
 
-  private readonly _size = signal<AlertVariants['size']>('default');
+  private readonly _size = signal<AlertVariants['size']>('small');
   @Input()
   set size(size: AlertVariants['size']) {
     this._size.set(size);

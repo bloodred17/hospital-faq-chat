@@ -2,7 +2,7 @@ import {Directive, HostListener} from '@angular/core';
 import {AccordionComponent} from './accordion.component';
 
 @Directive({
-  selector: '[accordionToggle]',
+  selector: '[mtAccordionToggle]',
   standalone: true
 })
 export class AccordionToggleDirective {

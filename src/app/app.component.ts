@@ -3,7 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import {
   AccordionComponent,
   AccordionGroupDirective,
-  AccordionToggleDirective, AlertDirective, AvatarDirective, AvatarIndicatorDirective, BadgeDirective,
+  AccordionToggleDirective,
+  AlertDirective,
+  AvatarDirective,
+  AvatarIndicatorDirective,
+  BadgeDirective,
+  BreadcrumbDirective, BreadcrumbItemDirective, ButtonDirective,
 } from 'angular-material-tailwind';
 
 @Component({
@@ -18,6 +23,9 @@ import {
     AvatarDirective,
     AvatarIndicatorDirective,
     BadgeDirective,
+    BreadcrumbDirective,
+    BreadcrumbItemDirective,
+    ButtonDirective,
 
   ],
   template: `
@@ -53,7 +61,7 @@ import {
         </mt-accordion>
       </div>
     </div>
-      
+
     <div class="p-12">
       <div mtAlert [variant]="'default'" [size]="'small'" class="flex-col">
         <p class="flex text-base">
@@ -93,6 +101,77 @@ import {
         <span mtBadge [position]="'bottom-left'" class="bg-red-500">
         5
       </span>
+      </div>
+    </div>
+
+    <div class="p-12">
+      <nav aria-label="breadcrumb" class="w-max">
+        <ol mtBreadcrumb class="bg-slate-50">
+          <li mtBreadcrumbItem class="text-slate-500 hover:text-slate-800">
+            <a href="#">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+              </svg>
+            </a>
+            <span class="pointer-events-none mx-2 text-slate-800">
+              /
+            </span>
+          </li>
+          <li class="flex cursor-pointer items-center text-sm text-slate-500 transition-colors duration-300 hover:text-slate-800">
+            <a href="#">Components</a>
+            <span class="pointer-events-none mx-2 text-slate-800">
+              /
+            </span>
+          </li>
+          <li class="flex cursor-pointer items-center text-sm text-slate-500 transition-colors duration-300 hover:text-slate-800">
+            <a href="#">Breadcrumbs</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="p-12 flex gap-4">
+      <button mtButton class="" type="button">
+        Button
+      </button>
+      <button mtButton variant="outline" class="" type="button">
+        Button
+      </button>
+      <button mtButton variant="text" class="" type="button">
+        Button
+      </button>
+    </div>
+
+    <div class="p-12 flex items-center gap-4">
+      <div>
+        <button mtButton size="xs" class="" type="button">
+          Button
+        </button>
+      </div>
+      <div>
+        <button mtButton size="sm" class="" type="button">
+          Button
+        </button>
+      </div>
+      <div>
+        <button mtButton size="md" class="" type="button">
+          Button
+        </button>
+      </div>
+      <div>
+        <button mtButton size="lg" class="" type="button">
+          Button
+        </button>
+      </div>
+      <div>
+        <button mtButton size="xl" class="" type="button">
+          Button
+        </button>
       </div>
     </div>
 

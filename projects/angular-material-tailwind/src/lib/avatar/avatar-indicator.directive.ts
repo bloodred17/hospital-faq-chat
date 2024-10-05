@@ -5,19 +5,20 @@ import {mtx} from '../core/mtx';
 
 
 export const indicatorVariants = cva(
-  'absolute min-w-[12px] min-h-[12px] rounded-full py-1 px-1 text-xs font-medium content-[\'\'] leading-none grid place-items-center translate-x-2/4 -translate-y-2/4\ text-white border border-white',
+  'absolute min-w-[12px] min-h-[12px] rounded-full py-1 px-1 text-xs font-medium content-[\'\'] leading-none grid place-items-center text-white border border-white',
   {
     variants: {
       variant: {
         default: ''
       },
       position: {
-        topRight: 'top-[5%] right-[5%]',
+        'top-right': 'top-[5%] right-[5%] translate-x-2/4 -translate-y-2/4',
+        'bottom-right': 'bottom-[4%] right-[2%] translate-x-2/4 translate-y-2/4'
       },
     },
     defaultVariants: {
       variant: 'default',
-      position: 'topRight'
+      position: 'top-right'
     }
   },
 )
@@ -50,9 +51,9 @@ export class AvatarIndicatorDirective {
     this._variant.set(variant);
   }
 
-  private readonly _position = signal<IndicatorVariants['position']>('topRight');
+  private readonly _position = signal<IndicatorVariants['position']>('top-right');
   @Input()
-  set size(size: IndicatorVariants['position']) {
+  set position(size: IndicatorVariants['position']) {
     this._position.set(size);
   }
 }

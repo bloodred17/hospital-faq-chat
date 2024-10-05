@@ -73,7 +73,7 @@ import {
           [size]="'large'"
           class="rounded-lg"
         />
-        <span mtAvatarIndicator class="bg-green-500"></span>
+        <span mtAvatarIndicator [position]="'bottomRight'" class="bg-green-500"></span>
       </div>
     </div>
 

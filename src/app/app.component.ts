@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, effect, OnInit, viewChild, ViewChild} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {
   AccordionComponent,
@@ -16,6 +16,10 @@ import {
   CheckboxComponent,
   ChipDirective, TooltipDirective
 } from 'angular-material-tailwind';
+import {AlertData, AlertService} from '../../projects/angular-material-tailwind/src/lib/alert/alerts.service';
+import {
+  AlertsContainerComponent
+} from '../../projects/angular-material-tailwind/src/lib/alert/alerts-container.component';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +41,7 @@ import {
     CheckboxComponent,
     ChipDirective,
     TooltipDirective,
+    AlertsContainerComponent,
   ],
   template: `
     <div class="p-2">
@@ -444,9 +449,38 @@ import {
         </ng-template>
       </div>
     </div>
+
+    <div class="fixed top-2 right-2">
+      <mt-alerts-container></mt-alerts-container>
+
+    </div>
+    <button (click)="showSuccessAlert()">Show Success Alert</button>
     <router-outlet></router-outlet>
   `,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'hospitalChat';
+  alertsContainer = viewChild(AlertsContainerComponent);
+
+  constructor(public alertService: AlertService) {
+    effect(() => {
+      if (this.alertsContainer()) {
+        this.alertService.setAlertContainer((this.alertsContainer() as AlertsContainerComponent).viewContainerRef);
+      }
+    });
+  }
+
+  ngOnInit() {
+    // this.alertService.setAlertContainer(this.alertsContainer.viewContainerRef);
+  }
+
+  showSuccessAlert() {
+    const alertData: AlertData = {
+      type: 'success',
+      message: 'Operation completed successfully!'
+    };
+
+    // Pass the ViewContainerRef to the service
+    this.alertService.showAlert(alertData);
+  }
 }

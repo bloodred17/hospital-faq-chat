@@ -6,7 +6,10 @@
     "paths": {
       "angular-material-tailwind": [
         "./dist/angular-material-tailwind"
-      ]
+      ],
+      "angular-material-tailwind/*": [
+        "./dist/angular-material-tailwind/*"
+      ],
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

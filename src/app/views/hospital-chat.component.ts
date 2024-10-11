@@ -35,7 +35,7 @@ import { NgTemplateOutlet } from '@angular/common';
             </div>
           </div>
           <div class="flex justify-end gap-2 flex-col-reverse sm:flex-row">
-            <div>
+            <div class="w-full flex justify-end">
               <ng-container [ngTemplateOutlet]="message" [ngTemplateOutletContext]="{$implicit: conversation.answers[0]}"></ng-container>
             </div>
             <div class="flex justify-end sm:flex-none">
@@ -62,6 +62,21 @@ import { NgTemplateOutlet } from '@angular/common';
             <div>
               <ng-container [ngTemplateOutlet]="message" [ngTemplateOutletContext]="{$implicit: question}"></ng-container>
             </div>
+          </div>
+          <div class="flex justify-end gap-2 flex-col-reverse sm:flex-row">
+            <div class="w-full flex justify-end">
+              <div class="rounded-lg shadow-md bg-slate-800 p-2 text-white w-fit">
+                <div class="loader"></div>
+              </div>
+            </div>
+            <div class="flex justify-end sm:flex-none">
+              <img src="lady.png"
+                alt="avatar"
+                mtAvatar
+                [size]="'small'"
+                class="rounded-full"
+              />
+              </div>
           </div>
         }
       </div>

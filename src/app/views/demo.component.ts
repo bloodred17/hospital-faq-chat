@@ -16,10 +16,10 @@ import {
   CheckboxComponent,
   ChipDirective, TooltipDirective
 } from 'angular-material-tailwind';
-import {AlertData, AlertService} from '../../projects/angular-material-tailwind/src/lib/alert/alerts.service';
+import {AlertData, AlertService} from '../../../projects/angular-material-tailwind/src/lib/alert/alerts.service';
 import {
   AlertsContainerComponent
-} from '../../projects/angular-material-tailwind/src/lib/alert/alerts-container.component';
+} from '../../../projects/angular-material-tailwind/src/lib/alert/alerts-container.component';
 
 @Component({
   selector: 'app-demo',

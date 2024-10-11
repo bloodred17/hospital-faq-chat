@@ -1,8 +1,13 @@
 import { Routes } from '@angular/router';
-import {DemoComponent} from './demo.component';
-import {HospitalChatComponent} from './hospital-chat.component';
+import {DemoComponent} from './views/demo.component';
+import {HospitalChatComponent} from './views/hospital-chat.component';
+import { HomeComponent } from './views/home.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+  },
   {
     path: 'demo',
     component: DemoComponent,

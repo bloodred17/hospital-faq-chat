@@ -1,39 +1,93 @@
-import {Component, OnInit} from '@angular/core';
-import {HospitalChatService} from './hospital-chat.service';
-import {FormsModule} from '@angular/forms';
-import {map} from 'rxjs';
+import { Component, OnInit, signal } from '@angular/core';
+import { HospitalChatService } from './hospital-chat.service';
+import { FormsModule } from '@angular/forms';
+import { map } from 'rxjs';
+import { TextComponent } from './ui/text.component';
+import { AvatarDirective, ButtonDirective } from 'angular-material-tailwind';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-hospital-chat',
   standalone: true,
   imports: [
     FormsModule,
+    TextComponent,
+    ButtonDirective,
+    NgTemplateOutlet,
+    AvatarDirective,
   ],
   template: `
-    <div>
-      @for (conversation of conversations; track conversation.question) {
-        <div class="bg-green-200">
-          {{conversation.question}}
-        </div>
-        <div class="bg-blue-200">
-          {{conversation.answers[0]}}
-        </div>
-        @if (question.length > 0) {
-          <div class="bg-green-200">
-            {{question}}
+    <div class="h-screen flex flex-col p-4">
+      <div class="h-full pb-4">
+        @for (conversation of conversations; track conversation.question) {
+          <div class="flex gap-2">
+            <div>
+            <img
+              src="gentleman.png"
+              alt="avatar"
+              mtAvatar
+              [size]="'small'"
+              class="rounded-full"
+            />
+            </div>
+            <ng-container [ngTemplateOutlet]="message" [ngTemplateOutletContext]="{$implicit: conversation.question}"></ng-container>
+          </div>
+          <div class="flex justify-end gap-2">
+            <ng-container [ngTemplateOutlet]="message" [ngTemplateOutletContext]="{$implicit: conversation.answers[0]}"></ng-container>
+            <div>
+              <img src="lady.png"
+                alt="avatar"
+                mtAvatar
+                [size]="'small'"
+                class="rounded-full"
+              />
+              </div>
           </div>
         }
-      }
+        @if (state() == 'sent' && question.length > 0) {
+        <div class="flex gap-2">
+          <div>
+            <img
+              src="gentleman.png"
+              alt="avatar"
+              mtAvatar
+              [size]="'small'"
+              class="rounded-full"
+            />
+          </div>
+          <ng-container [ngTemplateOutlet]="message" [ngTemplateOutletContext]="{$implicit: question}"></ng-container>
+        </div>
+        }
+      </div>
+      <div class="flex-grow">
+      </div>
+      <div class="flex gap-4">
+        <div class="w-full">
+          <app-text
+          [label]="'Question'"
+          [(value)]="question"
+          ></app-text>
+        </div>
+        <div class="py-1">
+          <button mtButton class="w-full h-full"
+            (click)="askQuestion()"
+          >Send</button>
+        </div>
+      </div>
     </div>
-    <input placeholder="Ask Question here..." [(ngModel)]="question">
-    <button (click)="askQuestion()">Ask</button>
+    <ng-template let-text #message>
+      <div class="rounded-lg shadow-md bg-slate-800 p-2 text-white">
+        {{text}}
+      </div>
+    </ng-template>
   `
 })
 export class HospitalChatComponent implements OnInit {
   question = '';
-  conversations: {question: string, answers: string[]}[] = [];
+  conversations: { question: string, answers: string[] }[] = [];
+  state = signal<'draft' | 'sent'>('draft');
 
-  constructor(private hospitalChatService: HospitalChatService) {}
+  constructor(private hospitalChatService: HospitalChatService) { }
 
   ngOnInit() {
   }
@@ -50,7 +104,9 @@ export class HospitalChatComponent implements OnInit {
           answers
         };
         this.question = '';
+        this.state.set('draft');
         this.conversations.push(conversation);
-      })
+      });
+    this.state.set('sent');
   }
 }
